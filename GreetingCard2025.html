@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Year Greeting Card</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+        body {
+            margin: 0;
+            font-family: Poppins, sans-serif;
+            background: linear-gradient(120deg, #ff9a9e, #fad0c4);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            /* text-align: center; */
+            margin: 15px;
+        }
+        #greeting-card {
+            display: none;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 2s;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .fireworks {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .firework {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: explode 2s linear infinite;
+        }
+
+        .writing-animation {
+    overflow: hidden;
+    border-right: 2px solid #000;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: 0.15em;
+    animation: typing 4s steps(40, end) infinite, blink-caret 0.5s step-end infinite;
+    background: linear-gradient(to right, #ff6a00, #ee0979);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink-caret {
+    from, to {
+        border-color: transparent;
+    }
+    50% {
+        border-color: black;
+    }
+}
+
+
+h1.writing-animation:first-of-type {
+    font-size: 3em;
+    font-weight: bold;
+}
+
+h1.writing-animation:nth-of-type(2) {
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+/* h2.writing-animation {
+    font-size: 2em;
+    margin-top: 10px;
+}
+
+p.writing-animation {
+    font-size: 1.5em;
+    margin-top: 20px;
+    color: #0066cc;
+} */
+
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink-caret {
+    from, to {
+        border-color: transparent;
+    }
+    50% {
+        border-color: black;
+    }
+}
+
+
+        .sandipan-font {
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(10);
+                opacity: 0;
+            }
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #ff6b81;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #ff4757;
+        }
+        #name-input {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+        #name-input input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        #name-input span {
+            color: red;
+            font-size: 14px;
+        }
+        /* Smartphone-specific styles */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+        font-size: 90%;
+    }
+
+    .container {
+        margin: 10px;
+    }
+
+    #greeting-card {
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    h1.writing-animation:first-of-type,
+    h1.writing-animation:nth-of-type(2) {
+        font-size: 2em; 
+    }
+
+    button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+
+    #name-input input {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    #name-input span {
+        font-size: 12px;
+    }
+
+    p {
+        font-size: 0.9em;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="name-input">
+            <h1>Welcome !</h1>
+            <input type="text" id="user-name" placeholder="Enter your name" oninput="validateName()"/>
+            <span id="error-message"></span>
+            <br>
+            <button onclick="showGreeting()">Submit</button>
+        </div>
+        <div id="greeting-card">
+            <h1 class="writing-animation"> 2025 </h1>
+            <h1 class="writing-animation">HAPPY NEW YEAR</h1>
+            <h2 id="user-name-display"></h2>
+            <p>Wishing you a year filled with happiness, success, and good health.</p>
+            <br>
+            <p class="sandipan-font">Greetings from Sandipan.</p>
+        </div>
+        <div class="fireworks" id="fireworks"></div>
+    </div>
+
+    <script>
+        function validateName() {
+            const nameInput = document.getElementById("user-name").value;
+            const errorMessage = document.getElementById("error-message");
+            const regex = /^[a-zA-Z]{1,10}$/;
+            if (!regex.test(nameInput)) {
+                errorMessage.textContent = "Please enter letters only and up to 10 characters.";
+            } else {
+                errorMessage.textContent = "";
+            }
+        }
+
+        function showGreeting() {
+            const userName = document.getElementById("user-name").value.toUpperCase();
+            if (userName && /^[a-zA-Z]{1,10}$/.test(userName)) {
+                document.getElementById("name-input").style.display = "none";
+                document.getElementById("greeting-card").style.display = "block";
+                document.getElementById("user-name-display").textContent = userName;
+                createFireworks();
+            } else {
+                alert("Please enter a valid name with letters only, up to 10 characters.");
+            }
+        }
+
+        function createFireworks() {
+            const fireworksContainer = document.getElementById("fireworks");
+            for (let i = 0; i < 50; i++) {
+                const firework = document.createElement("div");
+                firework.classList.add("firework");
+                firework.style.top = Math.random() * 100 + "%";
+                firework.style.left = Math.random() * 100 + "%";
+                firework.style.animationDelay = Math.random() + "s";
+                fireworksContainer.appendChild(firework);
+            }
+        }
+    </script>
+</body>
+</html>
